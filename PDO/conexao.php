@@ -1,7 +1,6 @@
 <?php
-function conectarBanco()
-{
-    $dsn = "mysql:host=localhost;dbname=empresa;charset=utf8;";
+function conectarBanco() {
+    $dsn = 'mysql:host=localhost;dbname=empresa;charset=utf8';
     $usuario = "root";
     $senha = "";
     try {
@@ -11,10 +10,9 @@ function conectarBanco()
         ]);
         return $conexao;
     } catch (PDOException $e) {
-        error_log("Erro ao conectar ao banco: " . $e->getMessage());
-        //LOG SEM EXPOR ERRO AO USUARIO
+        error_log("Erro ao conectar ao banco: ".$e->getMessage());
+        //log sem expor erro ao user
         die("Erro ao conectar ao banco.");
-
     }
 }
 ?>
