@@ -50,7 +50,7 @@ if($idCliente && is_numeric($idCliente)){
             </form>
         <?php else: ?>
         <!-- Se um cliente foi encontrado, exibe o formulario preenchido -->
-        <form action="processarAtualzação.php" method="POST">
+        <form action="processarAtualizacao.php" method="POST">
             <input type="hidden" name="id_cliente" value="<?= htmlspecialchars($cliente["id_cliente"])?>">
 
             <label for="nome">Nome:</label>

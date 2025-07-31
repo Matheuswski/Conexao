@@ -8,27 +8,34 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
     $nome = htmlspecialchars(trim($_POST['nome']));
     $endereco = htmlspecialchars(trim($_POST['endereco']));
     $telefone = htmlspecialchars(trim($_POST['telefone']));
-    $email = filter_var($_POST['email'], FILTER_VALIDATE_EMAIL);
+    $email = filter_var($_POST['email'], FILTER_SANITIZE_EMAIL);
 
     if (!$id || !$email) {
-        die('Erro: ID inválido ou email incorreto.');
+        die('Erro: ID inválido ou email incorreto');
+
     }
 
-    $sql = 'UPDATE clientes SET nome = :nome, endereco = :endereco, telefone = :telefone, email = :email WHERE id_cliente = :id';
+
+    $sql = "UPDATE cliente SET nome = :nome, endereco = :endereco, telefone = :telefone, email = :email WHERE id_cliente = :id";
 
     $stmt = $conexao->prepare($sql);
-    $stmt->bindparam(":id", $id, PDO::PARAM_INT);
-    $stmt->bindParam(":nome", $nome);
-    $stmt->bindParam(":endereco", $endereco);
-    $stmt->bindParam(":telefone", $telefone);
-    $stmt->bindParam(":email", $email);
+
+    $stmt->bindparam("id", $id, pdo::PARAM_INT);
+    $stmt->bindparam("nome", $nome);
+    $stmt->bindparam("endereco", $endereco);
+    $stmt->bindparam("telefone", $telefone);
+    $stmt->bindparam("email", $email);
 
     try {
         $stmt->execute();
         echo "Cliente atualizado com sucesso!";
     } catch (PDOException $e) {
-        error_log("Erro ao atualizar cliente." . $e->getMessage());
-        echo "Erro ao atualizar registro:";
+        error_log("Erro ao atualizar cliente:" . ($e->getMessage()));
+        echo "Erro ao atualizar registro.";
+
+
+
     }
+
 }
 ?>
