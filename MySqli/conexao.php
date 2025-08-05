@@ -1,17 +1,22 @@
 <?php
+//habilita o relatório de erros
 mysqli_report(MYSQLI_REPORT_ERROR | MYSQLI_REPORT_STRICT);
-function conectabd(){
+
+function conectadb(){
     $endereco = "localhost";
     $usuario = "root";
     $senha = "";
-    $banco ="empresa";
+    $banco = "empresa";
 
     try {
         $con = new mysqli($endereco, $usuario, $senha, $banco);
-        $con->set_charset("utf8mb4");
+        //Definição do conjunto de caracteres para evitar problemas com acentuação
+        $con->set_charset("utf8mb4"); 
+        //Retorna o objeto de conexão
         return $con;
     } catch (Exception $e) {
-        die("Erro na conexão: " . $e->getMessage()); 
-    }   
+        //Exibe mensagem de erro caso a conexão falhe
+        die("Erro ao conectar ao banco de dados: " . $e->getMessage());
+    }
 }
 ?>

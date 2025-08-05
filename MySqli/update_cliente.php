@@ -1,21 +1,22 @@
 <?php
 require_once "conexao.php";
 
-$conexao = conectabd();
+$conexao = conectadb();
 
-$nome = "Matheuswski";
-$endereco = "Jariva";
-$telefone = "4140028922";
-$email = "teteus17@teste.com";
+$nome = "Matheus Golanowski";
+$endereco = "Rua Davina de Nacimento, 163";
+$telefone = "(41) 4002-2922";
+$email = "MatheusGolanowski021@gmail.com";
 
 $id_cliente = 1;
 
 $stmt = $conexao->prepare("UPDATE cliente SET nome = ?, endereco = ?, telefone = ?, email = ? WHERE id_cliente = ?");
 $stmt->bind_param("ssssi", $nome, $endereco, $telefone, $email, $id_cliente);
+
 if ($stmt->execute()) {
-    echo "Cliente atualizado com sucesso!";
+    echo"Cliente atualizado com sucesso!";
 } else {
-    echo "Erro ao atualizar cliente: " . $stmt->error;
+    echo"Erro ao atualizar cliente: " . $stmt->error;
 }
 $stmt->close();
 $conexao->close();
